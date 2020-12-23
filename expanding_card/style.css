@@ -1,0 +1,83 @@
+/*css transition 배워야할것 */
+
+
+@import url('https://fonts.googleapis.com/css?family=Muli&display=swap');
+
+*{
+    box-sizing: border-box;
+
+}
+body{
+    font-family: Muli, Helvetica, sans-serif;
+    margin:0;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh; /*take up the entire height of the browser */
+    overflow: hidden; /*hide the scroll bar*/
+}
+
+.container{
+    display:flex;
+    width:90vw; /*viewport width, taking 90 of the 100*/
+   
+
+}
+
+.panel{
+    background-size:cover; /*to preserve rounded coners on the large screen*/
+    background-position: center; /*background position all sets to the center */
+    background-repeat: no-repeat; /*I don't want to repeat */
+    height:80vh; /*pictures height*/
+    border-radius: 50px;
+    color:#fff;
+    cursor:pointer;
+    flex:0.5;/*we're already using flexbox so we can use flex property*/
+    /*각각의 사진 크기 조정!!! 중요*/
+    margin:10px; /*사진끼리 서로 떨어지게*/
+    position: relative;/*사진 안에 있는 h3를 absolute으로 할려고 */
+
+    /*클릭했을때 사진width 조정하는거에 변화 주고 싶음.flex property에 변화주는거야*/
+    /*플렉스 프로퍼티에 하는거고.0.7세컨드 주고,ease in 효과줌 */
+    transition:flex 0.7s ease-in;
+
+
+}
+.panel h3{
+    font-size: 24px;
+    position: absolute;
+    bottom:20px;
+    left:20px;
+    margin:0;
+    /*글자가 active할때만 보이게 하기*/
+    opacity: 0;
+}
+
+/*패널(사진)이 액티브 할때*/
+.panel.active{
+flex:5; /*사진이 액티브할때 크기가 5정도로 되게*/
+}
+
+.panel.active h3{
+    opacity: 1;
+    /*클릭할때 글자가 이상하게 나타나서*/
+    /*opacity에 transition을 넣어줄거야*/
+    /*0.4s는 딜레이임.*/
+    transition:opacity 0.3s ease 0.4s
+}
+
+/*만약 스크린이 작다면 3개의 그림만 보여지게하자*/
+/*이것의 의미는 under 480px일때만 효과들이 나타나게 하겠다*/
+@media(max-width: 480px){
+    /*사진을 담은 컨테이너 너비는 100vw*/
+    .container{
+        width: 100vw; /*viewport width*/
+    }
+
+    /*화면이 작을때 under 480px일때 패널 2개 안보이게*/
+    .panel:nth-of-type(4),
+    .panel:nth-of-type(5){
+        display:none;
+    }
+
+}
