@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Progress</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!--컨테이너에 숫자(원형),버튼 다 들어가게--> 
+ <div class="container"> <!--text-align해주고-->
+     <div class="progress-container">
+     <!--숫자 조작하는거,display:flex,justify-content:space-between-->
+        
+        <!--파란선,클래스에 아이디도 추가하는건 자바스크립트에서 선택해야하기에 -->
+         <div class="progress" id="progress"></div>
+             <!--숫자,숫자에 서클오게 클래스네임붙임-->
+             <div class="circle active">1</div>
+             <div class="circle">2</div>
+             <div class="circle">3</div>
+             <div class="circle">4</div>
+
+         
+     </div>
+     <!--첫번째는 돌아갈 수 없으니,prev가 disabled되야!-->
+     <button class="btn" id="prev" disabled>Prev</button>
+     <button class="btn" id="next" >Next</button>
+
+    </div>   
+
+<script src="script.js"></script>    
+</body>
+</html>

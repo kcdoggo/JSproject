@@ -1,0 +1,126 @@
+@import url('https://fonts.googleapis.com/css2?family=Muli&display=swap');
+
+/*:root뭔지 찾아보기.계속 반복되는 색이라 아예 만들어놓음*/
+/*불러올땐 var(--line--border-fil)이렇게 불러옴*/
+:root {
+    --line--border-fil:#3498db;
+    --line--border-empty:#e0e0e0;
+}
+
+*{
+    box-sizing: border-box;
+}
+
+body{
+    background-color:#f6f7fb;
+    font-family:'Muli', Helvetica, sans-serif;
+    display:flex;
+    justify-content: center;
+    /*align이 센터되려면 height지정해줘야*/
+    align-items: center;
+    height:100vh;
+    overflow:hidden; /*커서 안보이게*/
+    margin:0;
+}
+
+.container{
+    /*text align!! 정리하기*/
+    text-align:center;
+}
+
+/*여기서는 숫자1,2,3,4를 조정한다*/
+.progress-container{
+    display:flex;
+    justify-content: space-between;
+    /*다른 것들을 이 숫자안에서 배치시킬수있도록 포지션relative*/
+    position:relative;
+    margin-bottom:30px;
+    /*container안에서 100%의 width,%와 vw의 차이*/
+    /*max-width와 width의 차이는 뭘까 그리고왜 설정하는 걸까*/
+    max-width: 100%;
+    /*이 숫자들의 기본적인 width를 설정해줌*/
+    width: 370px;
+}
+/*::before 설렉터는 회색줄로,아래 파란선 그래도 복사한것임.*/
+/* 숫자 뒤에오는 기본적인 회색 */
+.progress-container::before{
+    content:''; /*before설렉터쓰면 항상content:''써줘야*/
+    background-color:var(--line--border-empty);
+    position: absolute;/*줄을 가운데로 둬야하니,prgress container 숫자들의 중간*/
+    top:50%;
+    left:0; /*맨 첫째부터 시작*/
+    transform:translateY(-50%);    /*y축이 움직이여하니,Y, 50%위로!*/
+    height:4px;
+    width: 100%; /*starting point가 첨부터 끝임,파란줄과는 달라*/
+    z-index: -1;    /*circle뒤로 가게*/
+}
+
+.progress{
+    background-color:var(--line--border-fil);
+    /*progress-container안에서 position되는거라 absoulte */
+    position: absolute;
+    /*줄을 가운데로 둬야하니,prgress container 숫자들의 중간*/
+    top:50%;
+    left:0; /*맨 첫째부터 시작*/
+    transform:translateY(-50%);    /*y축이 움직이여하니,Y, 50%위로!*/
+    height:4px;
+    width: 0%; /*starting point가 0이니까*/
+    z-index: -1;    /*circle뒤로 가게*/
+    transition: 0.4s ease;    /*이 파란선이 옆으로 가게*/
+}
+
+
+/*숫자 클래스 이름이 circle임,서클조작하는 것*/
+.circle{
+    background-color:white;
+    color:#999;
+    border-radius:50%; /*레디어스할때 %써*/
+    /*써클이 동그랗게 될려면,길이와 너비 조정해야함*/
+    height:30px;
+    width:30px;
+    border: 3px var(--line--border-empty) solid;
+    /*서클안에 있는 숫자 센터시키기*/
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    /*서클도 색변해야하니 transition*/
+    transition: .4s ease; /*transition속도랑 맞춰줌*/
+
+}
+
+/*선 도착하면 서클색 바뀌도록,여기서 JS 
+.classList.add('active') 임 */
+.circle.active{
+    border-color:var(--line--border-fil);
+}
+
+.btn{
+    background-color:var(--line--border-fil);
+    color:white;
+    /*버튼 보기 흉하니까 보더 0로 설정해야해*/
+    border:0;
+    border-radius: 6px;
+    /*버튼 크기 조정할때,height와 width말고도 패딩으로 조정가능*/
+    padding: 10px 20px;
+    margin:5px; /*버튼 사이 간격*/
+    /*버튼 같은데에 커서 설정해주는 거야*/
+    cursor:pointer;
+    /*폰트 확실히 하기위해서*/
+    font-family:inherit;
+    font-size:14px;
+
+}
+/*버튼 클릭했을때 버튼이 조금내려가며 진짜 클릭되는 것마냥 효과줌*/
+.btn:active{
+    transform:scale(0.98); /*0.98만큼 내려감*/
+}
+/*btn이 focus인 상태에서는 아웃라인이 zero에서 none으로 가게*/
+.btn:focus{
+    outline:0;   
+}
+
+.btn:disabled{
+    background-color:var(--line--border-empty);
+    cursor:not-allowed;
+
+}
